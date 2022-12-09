@@ -2,6 +2,8 @@
 
 Powerful and simple tool for develop with local packages. DeerWatcher will watch your local packages and run your command when any changes are detected, restarting the process, like nodemon does.
 
+> **Warning**: This project is under development and is not yet ready for production. This documentation is also WIP and may not be up to date with the current state of the project and may change in the future.
+
 ## Installation
 
 ```bash
@@ -27,12 +29,16 @@ Add the following configuration to your file, in packages you can add the packag
 {
   "command": "node ./server.js",
   "packages": {
-    "@mypackage/hello-world": "path/to/project"
+    "@mypackage/hello-world": "path/to/project",
+    "@mypackage/hello-world2": {
+      "path": "path/to/project",
+      "ignore": ["src"]
+    }
   }
 }
 ```
 
-### Usage
+### CLI
 
 You can use deerwatcher in your package.json scripts or run it directly in your terminal.
 
@@ -42,4 +48,25 @@ You can use deerwatcher in your package.json scripts or run it directly in your 
     "dev": "deerwatcher"
   }
 }
+```
+
+### Importing DeerWatcher in your code
+
+You can import DeerWatcher in your code and use it as a library. If second argument is not provided, DeerWatcher will try to load the configuration from **deerwatcher.json** file.
+
+```js
+const DeerWatcher = require('deerwatcher');
+
+DeerWatcher.startWatchers(
+  () => {
+    console.log('Package changed');
+  }
+  {
+    '@mypackage/hello-world': 'path/to/project',
+    '@mypackage/hello-world2': {
+      path: 'path/to/project',
+      ignore: ['src']
+    }
+  }
+)
 ```

@@ -19,7 +19,7 @@
   "scripts": {
     "build": "tsup ./src/index.ts --format esm,cjs",
     "watch": "tsup ./src/index.ts --format esm,cjs --watch",
-    "dev": "concurrently \"yarn watch\" \"nodemon ./dist/index.js\"",
+    "dev": "concurrently \"yarn watch\" \"./bin/deerwatcher\"",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}' --quiet --fix",
     "clean": "rm -rf node_modules && rm -rf dist",
     "test": "jest",
@@ -44,7 +44,7 @@
     "@types/node": "18.11.11",
     "@typescript-eslint/eslint-plugin": "5.45.0",
     "@typescript-eslint/parser": "5.45.0",
-    "concurrently": "^7.6.0",
+    "concurrently": "7.6.0",
     "eslint": "8.28.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.26.0",
