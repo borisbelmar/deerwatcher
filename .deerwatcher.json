@@ -1,6 +1,0 @@
-{
-  "command": "node ./prueba.js",
-  "packages": {
-    "@mypackage/hello-world": "/Users/borisbelmar/Proyectos/Pruebas/local-dependencies/hello-world"
-  }
-}

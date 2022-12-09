@@ -1,6 +1,6 @@
 {
   "name": "deerwatcher",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple watcher for local packages",
   "main": "./dist/index.js",
   "files": [
