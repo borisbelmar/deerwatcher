@@ -1,7 +1,7 @@
 {
   "name": "deerwatcher",
   "version": "0.1.1",
-  "description": "Simple watcher for local packages",
+  "description": "Powerful and simple tool for develop with local packages. DeerWatcher will watch your local packages and run your command when any changes are detected, restarting the process, like nodemon does.",
   "main": "./dist/index.js",
   "files": [
     "dist"
