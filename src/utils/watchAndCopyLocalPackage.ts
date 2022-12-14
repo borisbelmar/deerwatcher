@@ -4,16 +4,17 @@ import { copyFile, copyFolderContentRecursive } from './copy'
 import type { LocalPackage } from './getLocalPackages'
 import mkdirRecursive from './mkdirRecursive'
 
-const copyLocalDependency = async (localPackage: LocalPackage) => {
+const copyLocalDependency = async (localPackage: LocalPackage, ignored: string[]) => {
   await mkdirRecursive(localPackage.modulePath)
-  await copyFolderContentRecursive(localPackage.path, localPackage.modulePath)
+  await copyFolderContentRecursive(localPackage.path, localPackage.modulePath, ignored)
 }
 
 const watchAndCopyLocalPackage = async (
   localPackage: LocalPackage,
   cb: () => void
 ) => {
-  await copyLocalDependency(localPackage)
+  const ignored = Array.from(new Set(['node_modules', '.git', ...localPackage.ignore]))
+  await copyLocalDependency(localPackage, ignored)
   cb()
 
   const dependencyWatcher = chokidar.watch(
@@ -21,7 +22,7 @@ const watchAndCopyLocalPackage = async (
     {
       ignoreInitial: true,
       // FIXME: Fix ignore!
-      ignored: Array.from(new Set(['node_modules', ...localPackage.ignore]))
+      ignored
     }
   )
 

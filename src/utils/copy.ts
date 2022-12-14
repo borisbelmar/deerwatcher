@@ -14,12 +14,25 @@ export const copyFile = async (sourcePath: string, targetPath: string) => {
   }
 }
 
-export const copyFolderContentRecursive = async (source: string, target: string) => {
+export const copyFolderContentRecursive = async (
+  source: string,
+  target: string,
+  ignored?: string[]
+) => {
   const files = await fs.readdir(source)
 
   const copyAllFiles = files.map(async file => {
     const sourcePath = path.join(source, file)
     const targetPath = path.join(target, file)
+
+    // ignore files on ignored folders or files in ignored array
+    if (
+      ignored?.includes(file)
+      || ignored?.includes(sourcePath)
+      || ignored?.some(ignoredPath => file.startsWith(ignoredPath))
+    ) {
+      return
+    }
 
     await copyFile(sourcePath, targetPath)
   })
